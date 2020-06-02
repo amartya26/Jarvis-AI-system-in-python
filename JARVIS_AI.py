@@ -4,6 +4,7 @@ import speech_recognition as sr  # pip install SpeechRecognition
 import wikipedia as wk  # pip install wikipedia
 import webbrowser as wb
 import os
+import smtplib
 import pyjokes  # pip install pyjokes
 import pyautogui  # pip install pyautogui
 import psutil
@@ -17,7 +18,8 @@ def speak(audio):
     engine.runAndWait()
 
 
-speak("Hi im jarvis")
+speak("Hi im jarvis your personal AI assistant,  im using your computer at")
+print("Hi im jarvis your personal AI assistant,  im using your computer at")
 
 # This function is for CPU and battery statistics
 
@@ -47,8 +49,38 @@ def date():
     speak(month)
     speak(year)
 
-# Function to take screenshot
 
+# Function to send the mail
+def send_mail():
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+
+    server.login('vermaamartya0226@gmail.com', 'yrprldhxjaogwiey')
+    speak("What will be the subject of mail ?")
+    print("What will be the subject of mail ?")
+
+    subject = takecommand().lower()
+
+    speak("What should i send in the body ?")
+    print("What should i send in the body ?")
+    body = takecommand().lower()
+
+    msg = f"Subject: {subject}\n\n{body}"
+    speak("To whom do i send this mail ?")
+    print("To whom do i send this mail ?")
+    to = input("Please enter the reciever's mail: ")  #taking user input
+    speak("Sending this mail to: "+to)
+    server.sendmail(
+        "From: vermaamartya0226@gmail.com",
+        "To:"+to,
+        msg)
+    speak("The mail has been sent")
+    print("Hey Mail has Been Sent!!")
+    server.quit()
+
+# Function to take screenshot
 
 def screenshot():
     img = pyautogui.screenshot()
@@ -56,15 +88,16 @@ def screenshot():
 
 # Function to crack Jokes
 
-
 def jokes():
     joke = pyjokes.get_joke()
     speak(joke)
 
 
 # On startup this function helps the JARVIS to Greet Us
+
 def wishme():
     speak("Welcome back sir")
+    print("Welcome back sir")
 
     hour = datetime.datetime.now().hour
     if 6 >= hour and hour < 12:
@@ -78,6 +111,7 @@ def wishme():
     speak("Jarvis at your sevice,  how can i help you")
 
 # Taking Voice Commands
+
 def takecommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -92,14 +126,17 @@ def takecommand():
     except Exception as e:
         print(e)
         speak("Sorry Sir but i am Unable to recognize your query, say it again please..")
+        print("Sorry Sir but i am Unable to recognize your query, say it again please..")
         return "none"
     return query
 
 
 # Main Function
+
 if __name__ == "__main__":
-    wishme()
     cpu()
+    wishme()
+
     while True:
         query = takecommand().lower()
 
@@ -155,6 +192,9 @@ if __name__ == "__main__":
             speak("Done")
             print("Done")
 
+        elif "mail" in query:
+            send_mail()
+
         elif "chrome" in query:
             speak("what should i search ?")
             print("What should i search ?")
@@ -172,3 +212,4 @@ if __name__ == "__main__":
         elif "jokes" or "joke" or "bored" in query:
             speak("Ok Im going to crack a joke")
             jokes()
+
