@@ -156,12 +156,10 @@ if __name__ == "__main__":
             print("Done")
 
         elif "chrome" in query:
-            speak("what should i search")
+            speak("what should i search ?")
             print("What should i search ?")
-            chromepath = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe %s"
-            wb.register('chrome', None, wb.BackgroundBrowser(chromepath))
             search = takecommand().lower()
-            wb.get('chrome').open_new_tab(search+'.com')
+            wb.open_new_tab("https://www."+search+".com")
 
         elif "wikipedia" in query:
             speak('searching...')
