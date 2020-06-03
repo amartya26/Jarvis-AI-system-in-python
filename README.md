@@ -17,4 +17,4 @@ The modules used in the project are as follows:
 
 
 Important note :-
-If speech_recognition is throwing some error regarding the pyaudio. Install Pyaudio, still getting error install pywin32 command and then try to install it again. Also, download the pyaudio's .whl file based on your operating system architecture (generally amd64) and the version of python running on your system). COpy and paste the downloaded file inside the speech recognition library folder. 
+If speech_recognition is throwing some error regarding the pyaudio. Install Pyaudio, still getting error install pywin32 module and then try to install it again. Also, download the pyaudio's .whl file based on your operating system architecture (generally amd64) and the version of python running on your system). COpy and paste the downloaded file inside the speech recognition library folder. 
